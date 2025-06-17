@@ -1,0 +1,21 @@
+{
+  "name": "sensor-rest-api",
+  "version": "1.0.0",
+  "description": "API REST pour capteurs + frontend statique",
+  "type": "commonjs",
+  "scripts": {
+    "start:backend": "node node_server/server.js",
+    "start:frontend": "http-server frontend/public -p 3001"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.15.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

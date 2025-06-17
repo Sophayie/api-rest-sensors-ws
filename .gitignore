@@ -1,0 +1,11 @@
+# Fichiers Python (client_rpi)
+__pycache__/
+*.pyc
+
+# Node modules 
+node_modules/
+
+# Environnement virtuel Python
+.venv/
+venv/
+client_rpi/config.yaml

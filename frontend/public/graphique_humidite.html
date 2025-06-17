@@ -1,0 +1,92 @@
+<!-- fichier : graphique_humidite.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Graphique Humidité</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      padding: 40px;
+      text-align: center;
+    }
+    canvas {
+      max-width: 800px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Historique d'humidité</h1>
+  <canvas id="graphiqueHum"></canvas>
+
+  <script>
+    const capteurId = localStorage.getItem("capteurIdHum");
+
+    if (!capteurId) {
+      alert("Aucun capteur d'humidité actif.");
+    } else {
+      fetch(`http://localhost:3000/api/measurements/sensorId/${capteurId}`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`Erreur HTTP ${res.status}`);
+          }
+          return res.json();
+        })
+        .then(mesures => {
+          const labels = mesures.map(m =>
+            new Date(m.takeAt || m.createdAt || m.date).toLocaleTimeString()
+          );
+          const valeurs = mesures.map(m => m.value);
+
+          new Chart(document.getElementById("graphiqueHum"), {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Humidité (%)',
+                data: valeurs,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2,
+                fill: true
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true },
+                title: {
+                  display: true,
+                  text: 'Historique d’humidité du capteur'
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 100,
+                  title: {
+                    display: true,
+                    text: 'Humidité (%)'
+                  }
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Heure'
+                  }
+                }
+              }
+            }
+          });
+        })
+        .catch(err => {
+          console.error("Erreur chargement graphique :", err);
+          alert("Erreur de chargement des données.");
+        });
+    }
+  </script>
+</body>
+</html>
