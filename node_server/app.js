@@ -18,21 +18,10 @@ app.use(logger);
 
 // CORS configuration manuelle
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: 'http://localhost:4200',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
 }));
-
-// ✅ Correction manuelle OPTIONS compatible avec Node 22+
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    return res.sendStatus(200);
-  }
-  next();
-});
 
 // Sécurité
 app.use(helmet());

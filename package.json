@@ -4,8 +4,7 @@
   "description": "API REST pour capteurs + frontend statique",
   "type": "commonjs",
   "scripts": {
-    "start:backend": "node node_server/server.js",
-    "start:frontend": "http-server frontend/public -p 3001"
+    "start:backend": "node node_server/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
