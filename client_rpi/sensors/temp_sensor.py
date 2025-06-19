@@ -2,7 +2,7 @@ import time
 import board
 import adafruit_dht
 import yaml
-from client import send_measurement
+from client_rpi.client_ws import send_measurement
 
 # Charger config.yaml
 with open("config.yaml", "r") as f:

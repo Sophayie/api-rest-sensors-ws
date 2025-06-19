@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Le mot de passe est requis'],
     minlength: [4, 'Le mot de passe doit contenir au moins 4 caractères']
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true // Ajoute createdAt et updatedAt automatiquement

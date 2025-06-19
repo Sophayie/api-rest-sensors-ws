@@ -1,11 +1,24 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
+
+// Générer un token JWT
+const generateToken = (userId) => {
+  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+};
 
 // POST /api/users --> Créer un utilisateur
 const createUser = async (req, res) => {
   try {
     const { firstName, lastName, email, motdepasse } = req.body;
 
-    const newUser = await User.create({ firstName, lastName, email, motdepasse });
+    // Hasher le mot de passe
+    const hashedPassword = await bcrypt.hash(motdepasse, 10); 
+
+    const newUser = await User.create({ firstName, lastName, email, motdepasse: hashedPassword }); // Utiliser hashedPassword à la place de motdepasse
+    
     res.status(201).json({
     _id: newUser._id,
     firstName: newUser.firstName,
@@ -38,6 +51,11 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
 
+    // Hacher le nouveau mot de passe si présent
+    if (req.body.motdepasse) {
+      req.body.motdepasse = await bcrypt.hash(req.body.motdepasse, 10);
+    }
+
     const updatedUser = await User.findByIdAndUpdate(id, req.body, {
       new: true, // renvoie l'utilisateur mis à jour
       runValidators: true, // obligatoire pour forcer la validation du schéma
@@ -57,6 +75,11 @@ const updateUser = async (req, res) => {
 const replaceUser = async (req, res) => {
   try {
     const { id } = req.params;
+    
+    // Hacher le nouveau mot de passe si présent
+    if (req.body.motdepasse) {
+      req.body.motdepasse = await bcrypt.hash(req.body.motdepasse, 10);
+    }
 
     const replacedUser = await User.findByIdAndUpdate(id, req.body, {
       new: true, // renvoie l'utilisateur mis à jour
@@ -74,6 +97,7 @@ const replaceUser = async (req, res) => {
   }
 };
 
+// POST /api/users/login --> Connexion d'un utilisateur
 const loginUser = async (req, res) => {
   const { email, motdepasse } = req.body;
 
@@ -84,13 +108,20 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Utilisateur non trouvé' });
     }
 
-    if (user.motdepasse !== motdepasse) {
+    const isMatch = await bcrypt.compare(motdepasse, user.motdepasse);
+    if (!isMatch) {
       return res.status(401).json({ message: 'Mot de passe incorrect' });
     }
+    
+    const token = generateToken(user._id);
 
     res.status(200).json({
-      _id: user._id,             
+      _id: user._id,
       firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      isAdmin: user.isAdmin || false,
+      token, // Ajout du token JWT
       message: 'Connexion réussie'
     });
   } catch (err) {

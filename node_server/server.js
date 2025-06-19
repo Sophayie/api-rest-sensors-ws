@@ -11,7 +11,11 @@ connectDB();
 // Lecture du port dans .env ou fallback sur 3000
 const PORT = process.env.PORT || 3000;
 
-// Démarrage du serveur
+// Démarrage du serveur Express
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`Serveur Express démarré sur http://localhost:${PORT}`);
 });
+
+// Démarrage du serveur WebSocket
+require('./wsServer');
+

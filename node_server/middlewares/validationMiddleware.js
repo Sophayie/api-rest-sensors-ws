@@ -30,7 +30,6 @@ const validateLoginFields = (req, res, next) => {
   next();
 };
 
-
 // Validation pour la création d’un capteur
 function validateSensorFields(req, res, next) {
   const { name, type, unit, userId } = req.body;
@@ -39,24 +38,33 @@ function validateSensorFields(req, res, next) {
     return res.status(400).json({ error: 'Les champs name, type et userId sont requis.' });
   }
 
-  // Vérifier le champ `unit` uniquement si type !== motion
-  if (type !== 'motion' && !unit) {
+  const allowedTypes = ['temperature', 'humidity', 'led'];
+  if (!allowedTypes.includes(type)) {
+    return res.status(400).json({ error: `Le type '${type}' n'est pas autorisé.` });
+  }
+
+  // Vérifie unit uniquement si type ≠ led
+  if (type !== 'led' && !unit) {
     return res.status(400).json({ error: 'Le champ unit est requis pour ce type de capteur.' });
   }
 
   next();
 }
+
 // Validation pour la création d’une mesure
 const validateMeasurementFields = (req, res, next) => {
-  const { sensorId, value, takenAt } = req.body;
+  const { sensorId, value, takenAt, deviceId, userId } = req.body;
 
-  if (!sensorId || value === undefined || !takenAt) {
-    return res.status(400).json({ message: 'Les champs sensorId, value et takenAt sont requis.' });
+  if (!sensorId || value === undefined || !takenAt || !deviceId || !userId) {
+    return res.status(400).json({
+      message: 'Les champs sensorId, value, takenAt, deviceId et userId sont requis.'
+    });
   }
-  
-  // Vérifier si la valeur est un nombre positif
+
   if (typeof value !== 'number' || value < 0) {
-    return res.status(400).json({ message: 'La valeur doit être un nombre positif.' });
+    return res.status(400).json({
+      message: 'La valeur doit être un nombre positif.'
+    });
   }
 
   next();

@@ -6,6 +6,15 @@ const measurementSchema = new mongoose.Schema({
     ref: 'Sensor',
     required: true
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  deviceId: {
+    type: String,
+    required: true
+  },
   value: {
     type: Number,
     required: [true, 'La valeur est requise'],

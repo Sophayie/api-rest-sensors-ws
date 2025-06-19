@@ -9,12 +9,12 @@ const sensorSchema = new mongoose.Schema({
   type: {
     type: String,
     required: [true, 'Le type est requis'],
-    enum: ['temperature', 'motion', 'humidity'], // à adapter selon nos capteurs
+    enum: ['temperature', 'humidity', 'led'], // à adapter selon nos capteurs
   },
   unit: {
     type: String,
     required: function () {
-      return this.type !== "motion"; // facultatif pour les capteurs de mouvement
+      return this.type !== 'led'; // facultatif pour la led
     }
   },
   userId: {

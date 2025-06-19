@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import yaml
 import random
-from client import send_measurement
+from client_rpi.client_ws import send_measurement
 from gpio.led import led_on, led_off
 from gpio.init import gpio_cleanup
 
@@ -36,8 +36,8 @@ def run_button_humidity_sensor():
 
                 # Attente pour éviter lecture multiple d'un seul appui
                 time.sleep(1)
-
             time.sleep(0.1)
+            
     except KeyboardInterrupt:
         print("\nInterruption par l'utilisateur.")
     finally:

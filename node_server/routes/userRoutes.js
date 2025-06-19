@@ -31,6 +31,7 @@ router.patch('/:id', updateUser);
 // PUT /api/users/:id --> Remplacer un utilisateur
 router.put('/:id',validateUserFields, replaceUser);
 
+// POST /api/users/login --> Connexion d'un utilisateur
 router.post('/login', validateLoginFields, loginUser);
 
 router.delete('/:id', deleteUser);

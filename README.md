@@ -1,8 +1,8 @@
-# sensor-rest-api
-Développement d’une API REST complète pour l’enregistrement, la consultation et le filtrage de données de capteurs dans MongoDB
+# api-rest-sensors-ws
+Serveur Express pour capteurs IoT avec API REST, WebSocket et authentification JWT + WebClient Interface
 
 ```
-led-supervision/
+API-REST-SENSORS-WS/
 │
 ├── node_server/                         # Serveur Node.js (API REST + interface web)
 │   ├── config/                          # Configuration de la BDD et variables d'environnement
@@ -44,17 +44,15 @@ led-supervision/
 |
 ├── client_rpi/                          # Client embarqué (Raspberry Pi)
 │   ├── sensors/
-│   │   ├── pir_sensor.py                # Capteur PIR
 │   │   ├── button_humidity_sensor.py    # Bouton simulant des taux d'humidité
 │   │   └── temp_sensor.py               # Capteur de température
 │   ├── gpio/
 │   │   ├── init.py                      # Initialisation des pins GPIO
 │   │   └── led.py                       # LEDs 
 |   |
-│   ├── client.py                        # Envoi POST 
+│   ├── client_ws.py                     # Client WebSocket pour envoyer des mesures et recevoir des commandes
 │   ├── main.py                          # Point d'entrée du client
-│   ├── sensor_mapper.py                 # Mapping des Id des capteurs
-│   └── config.yaml                      # Adresse serveur, seuils, pins gpio
+│   └── config.yaml                      # Adresse serveur, seuils, pins gpio, sensorIds, DeviceId
 │
 │
 ├── README.md                            # Explication du projet
