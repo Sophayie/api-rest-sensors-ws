@@ -55,7 +55,7 @@ wss.on('connection', (ws) => {
         fs.appendFileSync(logFilePath, logEntry);
 
         // Vérifier si le capteur existe
-        const sensor = await Sensor.findById(sensorId).populate('user');
+        const sensor = await Sensor.findById(sensorId).populate('userId');
         if (!sensor) {
           console.warn(`[!] SensorId inconnu : ${sensorId}`);
           return;
@@ -64,14 +64,14 @@ wss.on('connection', (ws) => {
         // Créer et enregistrer la mesure
         const newMeasurement = new Measurement({
           sensorId,
-          userId: sensor.user._id,
+          userId: sensor.userId._id,
           deviceId,
           value,
           takenAt: takenAt || new Date().toISOString()
         });
 
         await newMeasurement.save();
-        console.log(`[✓] Mesure enregistrée : ${value} (${sensor.name}) pour ${sensor.user.email}`);
+        console.log(`[✓] Mesure enregistrée : ${value} (${sensor.name}) pour userId=${sensor.userId._id}`);
       }
 
     } catch (err) {

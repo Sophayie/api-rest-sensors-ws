@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import yaml
 import random
-from client_rpi.client_ws import send_measurement
+from client_ws import send_measurement
 from gpio.led import led_on, led_off
 from gpio.init import gpio_cleanup
 

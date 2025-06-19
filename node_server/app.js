@@ -41,9 +41,11 @@ app.use(helmet());
 const userRoutes = require('./routes/userRoutes');
 const sensorRoutes = require('./routes/sensorRoutes');
 const measurementRoutes = require('./routes/measurementRoutes');
+const commandRoutes = require('./routes/commandRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/sensors', sensorRoutes);
 app.use('/api/measurements', measurementRoutes);
+app.use('/api/commands', commandRoutes);
 
 module.exports = app;
