@@ -6,3 +6,12 @@ html, body {
   overflow-x: hidden;
 }
 
+
+/*Palette de couleur du projet*/
+:root {
+  --primary-color: #94A880;
+  --secondary-color: #F9CEBB;
+  --accent-color: #284A2D;
+  --accent-color2: #D97F63;
+  --neutral-color: #F3EFE4;
+}
