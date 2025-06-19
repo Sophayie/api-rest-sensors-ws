@@ -1,0 +1,17 @@
+device_id: "rpi-007"  # Identifiant unique du Pi (doit être enregistré côté serveur)
+
+ws_url: "ws://192.168.0.113:3002"  # Adresse du serveur WebSocket
+
+sensor_ids:
+  temperature: "6853753395252ad8872e1eaf"
+  humidity: "6853750f95252ad8872e1ead"
+  led: "6853755595252ad8872e1eb1"  
+
+gpio:
+  temp_pin: 4               # DHT11 (GPIO 4)
+  button_pin: 13            # Bouton en pull-down
+  led_humidity_pin: 12      # LED pour signaler humidité > seuil
+  led_control_pin: 25       # LED à contrôler à distance via WebSocket
+
+thresholds:
+  humidity: 50              # Seuil d’alerte pour l’humidité
