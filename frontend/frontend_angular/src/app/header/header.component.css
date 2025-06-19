@@ -1,0 +1,21 @@
+.scallop-header {
+  position: relative;
+  background-color: var(--secondary-color);
+  height: 300px; /* espace pour le fond + vague */
+  overflow: visible;
+}
+
+.wave-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px; /* Même hauteur que la courbe max dans les Q */
+  overflow: hidden;
+
+}
+
+.wave-bottom svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

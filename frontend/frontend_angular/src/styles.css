@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;1,400&family=Lora&display=swap');
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  background-color: var(--neutral-color);
 }
-
 
 /*Palette de couleur du projet*/
 :root {
@@ -14,4 +16,7 @@ html, body {
   --accent-color: #284A2D;
   --accent-color2: #D97F63;
   --neutral-color: #F3EFE4;
+
+  --font-titre: 'Cormorant Infant', serif;
+  --font-texte: 'Lora', serif;
 }
