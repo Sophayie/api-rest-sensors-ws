@@ -40,6 +40,12 @@ const getSensorById = async (req, res) => {
 const getSensorsByUser = async (req, res) => {
   try {
     const { userId } = req.params;
+
+    // L'utilisateur connecté n'est pas admin → il ne peut accéder qu'à ses propres capteurs
+    if (req.user._id.toString() !== userId && !req.user.isAdmin) {
+      return res.status(403).json({ message: "Accès interdit à ces capteurs." });
+    }
+    
     const sensors = await Sensor.find({ userId }).populate('userId', 'firstName lastName');
     res.status(200).json(sensors);
   } catch (error) {

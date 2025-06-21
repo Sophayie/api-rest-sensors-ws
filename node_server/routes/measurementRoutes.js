@@ -14,21 +14,24 @@ const {
   validateMeasurementFields
 } = require('../middlewares/validationMiddleware');
 
+const { auth } = require('../middlewares/authMiddleware');
+const { isAdmin } = require('../middlewares/adminMiddleware');
+
 // POST /api/measurements --> Créer une mesure
-router.post('/', validateMeasurementFields, createMeasurement);
+router.post('/', auth, isAdmin, validateMeasurementFields, createMeasurement); // Uniquement pour les administrateurs
 
 // GET /api/measurements --> Récupérer toutes les mesures
-router.get('/', getAllMeasurements);
+router.get('/', auth, isAdmin, getAllMeasurements); // Uniquement pour les administrateurs
 
 // GET /api/measurements/sensorId/:sensorId --> Récupérer les mesures par sensorId
-router.get('/sensorId/:sensorId', getMeasurementsBySensor);
+router.get('/sensorId/:sensorId', auth, getMeasurementsBySensor); 
 
 // PATCH /api/measurements/:id --> Mettre à jour une mesure
-router.patch('/:id', updateMeasurement);
+router.patch('/:id', auth, isAdmin, updateMeasurement); // Uniquement pour les administrateurs
 
 // PUT /api/measurements/:id --> Remplacer une mesure
-router.put('/:id',validateMeasurementFields, replaceMeasurement);
+router.put('/:id', auth, isAdmin, validateMeasurementFields, replaceMeasurement); // Uniquement pour les administrateurs
 
-router.get('/latest/sensorId/:sensorId', getLatestMeasurementBySensor);
+router.get('/latest/sensorId/:sensorId', auth, getLatestMeasurementBySensor);
 
 module.exports = router;

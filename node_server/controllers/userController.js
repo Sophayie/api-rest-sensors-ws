@@ -18,7 +18,12 @@ const createUser = async (req, res) => {
     // Hasher le mot de passe
     const hashedPassword = await bcrypt.hash(motdepasse, 10); 
 
-    const newUser = await User.create({ firstName, lastName, email, motdepasse: hashedPassword }); // Utiliser hashedPassword à la place de motdepasse
+    const newUser = await User.create({ 
+      firstName, 
+      lastName, 
+      email, 
+      motdepasse: hashedPassword  // Stockage du mot de passe hashé
+    }); 
     
     res.status(201).json({
     _id: newUser._id,
@@ -34,6 +39,42 @@ const createUser = async (req, res) => {
     } else {
       res.status(500).json({ message: 'Erreur serveur', error: error.message });
     }
+  }
+};
+
+// POST /api/users/create-admin --> Créer un administrateur
+const createAdmin = async (req, res) => {
+  try {
+    const { firstName, lastName, email, motdepasse } = req.body;
+
+    // Vérifie si l'utilisateur existe déjà
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Cet email est déjà utilisé.' });
+    }
+
+    // Hash du mot de passe
+    const hashedPassword = await bcrypt.hash(motdepasse, 10);
+
+    // Création avec le rôle admin
+    const newAdmin = await User.create({
+      firstName,
+      lastName,
+      email,
+      motdepasse: hashedPassword,
+      isAdmin: true,
+    });
+
+    res.status(201).json({
+      _id: newAdmin._id,
+      firstName: newAdmin.firstName,
+      lastName: newAdmin.lastName,
+      email: newAdmin.email,
+      isAdmin: true,
+      message: 'Administrateur créé avec succès',
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur serveur', error: error.message });
   }
 };
 
@@ -166,6 +207,7 @@ const getUserById = async (req, res) => {
 
 module.exports = {
   createUser,
+  createAdmin,
   getAllUsers,
   updateUser,
   replaceUser,
