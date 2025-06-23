@@ -1,0 +1,14 @@
+<section class="formulaire_connexion">
+  <section class="FormulaireConnexion">
+    <h1>Connexion</h1>
+    <p>Première connexion? Inscris-toi <a [routerLink]="['/accueil']">ici</a></p>
+
+    <form [formGroup]="applyForm" (submit)="submitConnexion()">
+        <label for="email">Email:</label><br>
+        <input type="email" id='email' formControlName="email"><br>
+        <label for="motdepasse">Mot de passe :</label><br>
+        <input type="password" id="motdepasse" name="motdepasse" formControlName="password"><br>
+      <button type="submit" class="fill"  [routerLink]="['/dashboard']">Se connecter</button>
+    </form>
+  </section>
+</section>

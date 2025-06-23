@@ -1,0 +1,74 @@
+.bodyCapteur {
+    position: relative;
+    width: 500px;
+    left: 160px;
+    top: 180px;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    background: var(--neutral-color);
+    backdrop-filter: none;
+}
+
+
+h2 {
+    text-align: center;
+    color: var(--accent-color);
+    padding-bottom: 10px;
+    font-family: var(--font-texte);
+    font-size: 1.5rem;
+}
+
+p{
+    text-align: center;
+    color: var(--accent-color);
+    padding-bottom: 10px;
+    font-family: var(--font-texte);
+}
+
+.Bouton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding-top: 21px;
+}
+
+button {
+    padding: 8px 14px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    font-size: 1rem;
+    font-family: var(--font-texte);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #94a8808f;
+}
+
+input {
+    margin: 5px;
+    margin-bottom: 0px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: var(--primary-color) solid 2px;
+    border-radius: 6px;
+    background-color: var(--neutral-color);
+
+}
+
+
+#humidity{
+    margin-bottom: 30px;
+}
+
+.humidimetre p{
+    font-size: 0.8rem;
+}
+
+
+

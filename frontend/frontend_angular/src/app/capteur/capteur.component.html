@@ -1,0 +1,18 @@
+<section class="bodyCapteur">
+    <h2>Nom de la serre:</h2>
+    <p><strong>Nom actuel :</strong> <span id="nomActuelCapteur">–</span></p>
+    <div class="changer-nom-capteur">
+        <input type="text" id="champNomCapteur" placeholder="Nouveau nom de la serre" />
+        <button onclick="modifierNomCapteur()">Modifier le nom</button>
+        <p id="messageNomCapteur"></p>
+    </div>
+    <div class="temperature">
+        <app-temperature></app-temperature>
+    </div>
+    <div class="humidimetre">
+        <app-humidimetre></app-humidimetre>
+    </div>
+    <div class="lumiere">
+        <app-lampe></app-lampe>
+    </div>
+</section>

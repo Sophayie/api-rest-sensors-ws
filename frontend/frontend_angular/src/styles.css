@@ -15,8 +15,8 @@ html, body {
   --secondary-color: #F9CEBB;
   --accent-color: #284A2D;
   --accent-color2: #D97F63;
-  --neutral-color: #F3EFE4;
+  --neutral-color: #f5f1e7;
 
-  --font-titre: 'Cormorant Infant', serif;
+  --font-titre: 'Cormorant Infant', sans-serif;
   --font-texte: 'Lora', serif;
 }

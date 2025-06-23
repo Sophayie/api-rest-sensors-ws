@@ -1,0 +1,139 @@
+.range-slider{ margin: 30px 0 0 0; }
+.range-slider input[type="range"]{
+    background: var(--accent-color2);
+    width: calc(100% - (78px));
+    height: 5px;
+    border-radius: 3px;
+    outline: none;
+    float: left;
+    -webkit-appearance: none;
+    position: relative;
+}
+.range-slider input[type="range"]::-webkit-slider-thumb{
+    background: var(--neutral-color);
+    width: 13px;
+    height: 10px;
+    border-radius: 50px 0;
+    box-shadow: 0 0 0 5px var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out 0s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.range-slider input[type="range"]::-webkit-slider-thumb:hover,
+.range-slider input[type="range"]:active::-webkit-slider-thumb{
+    box-shadow: 0 0 0 5px var(--accent-color2);
+}
+.range-slider input[type="range"]::-moz-range-thumb{
+    background: #fff;
+    width: 13px;
+    height: 10px;
+    border: none;
+    border-radius: 50px 0;
+    box-shadow: 0 0 0 5px var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out 0s;
+}
+.range-slider input[type="range"]::-moz-range-thumb:hover,
+.range-slider input[type="range"]:active::-moz-range-thumb{
+    box-shadow: 0 0 0 5px var(--accent-color2);
+}
+.range-slider .range-value{
+    color: var(--neutral-color);
+    background: var(--secondary-color);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 35px;
+    width: 65px;
+    height: 35px;
+    margin-left: 8px;
+    border-radius: 0 40px;
+    display: inline-block;
+    position: relative;
+    top: -17px;
+}
+::-moz-range-track{
+    background: transparent;
+    border: 0;
+}
+.range-slider {
+  position: relative;
+  width: 100%;
+  max-width: 90%;  
+  margin: 0 auto;    
+  padding: 0 20px; 
+  box-sizing: border-box;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--accent-color);
+  margin: 30px 0;
+  font-family: var(--font-texte);
+  font-size: 1.0rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #555;
+  margin: 0 10px;
+}
+
+.divider span {
+  font-weight: 500;
+  color: #ccc;
+}
+
+.humidite-ligne {
+  display: flex;
+  justify-content: center; /* centré au lieu de space-between */
+  align-items: center;
+  gap: 50px; /* distance réduite entre le titre et la valeur */
+  margin-bottom: 6px;
+}
+
+.humidite-ligne h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.humidite-valeur {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.humidite-container {
+  font-family: var(--font-texte);
+  color: var(--accent-color);
+  margin-bottom: 30px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-group button {
+  padding: 6px 12px;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-group button:hover {
+  background-color: #94a8808f;
+}

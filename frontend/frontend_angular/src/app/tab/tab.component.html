@@ -1,0 +1,23 @@
+<section class="tab-contenant">
+  <app-background-dashboard>
+    <div class="background-tab-capteur" [ngClass]="{'compte-style': ongletActif === 'compte'}">
+      <ng-container *ngIf="ongletActif === 'dashboard'">
+        <app-capteur></app-capteur>
+      </ng-container>
+
+      <ng-container *ngIf="ongletActif === 'compte'">
+        <app-compte></app-compte>
+      </ng-container>
+
+      <ng-container *ngIf="ongletActif === 'admin'">
+        <app-administateur></app-administateur>
+      </ng-container>
+    </div>
+  </app-background-dashboard>
+
+  <div class="tab-buttons">
+    <button type="button" class="fill" (click)="changerOnglet('dashboard')">Dashboard</button>
+    <button type="button" class="fill2" (click)="changerOnglet('compte')">Mon Compte</button>
+    <button type="button" class="fill" (click)="changerOnglet('admin')">Administrateur</button>
+  </div>
+</section>

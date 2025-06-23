@@ -1,0 +1,46 @@
+svg {
+  width: 600px;
+  height: auto;
+}
+
+path,
+line,
+polyline,
+polygon,
+rect,
+circle,
+ellipse {
+  stroke: var(--accent-color);
+  fill: none;
+  stroke-linecap: round;
+  animation: draw 3s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ligne-feuilles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  color: var(--accent-color);
+  font-family: var(--font-texte);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.phrase-animée {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.phrase-animée.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
