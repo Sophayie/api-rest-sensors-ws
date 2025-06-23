@@ -1,8 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;1,400&family=Lora&display=swap');
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  background-color: var(--neutral-color);
 }
 
+/*Palette de couleur du projet*/
+:root {
+  --primary-color: #94A880;
+  --secondary-color: #F9CEBB;
+  --accent-color: #284A2D;
+  --accent-color2: #D97F63;
+  --neutral-color: #f5f1e7;
+
+  --font-titre: 'Cormorant Infant', sans-serif;
+  --font-texte: 'Lora', serif;
+}
+
+.bodyAccueil {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.section-serre,
+.formulaire {
+  flex: 1 1 400px;
+  max-width: 600px;
+}
+
+/* RESPONSIVE : sur petit écran, empiler les deux sections */
+@media (max-width: 100px) {
+  .bodyAccueil {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .formulaire {
+    width: 90%;
+  }
+
+  .section-serre {
+    width: 90%;
+  }
+
+  .section-formulaire {
+    width: 100%;
+  }
+
+  .backgroundFormulaire {
+    display: none; /* ou adapte selon ce que tu veux */
+  }
+}

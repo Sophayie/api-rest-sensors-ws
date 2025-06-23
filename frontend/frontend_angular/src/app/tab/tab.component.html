@@ -1,0 +1,27 @@
+<section class="tab-contenant">
+  <app-background-dashboard>
+    <ng-container *ngIf="ongletActif === 'dashboard'">
+      <div class="conteneur-dashboard">
+        <h2>Tableau de bord</h2>
+        <div class="ligne-separation"></div>
+        <app-capteur></app-capteur>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="ongletActif === 'compte'">
+      <app-compte></app-compte>
+    </ng-container>
+
+    <ng-container *ngIf="ongletActif === 'admin'">
+      <h2>Administrateur</h2>
+      <div class="ligne-separation"></div>
+      <app-administateur></app-administateur>
+    </ng-container>
+  </app-background-dashboard>
+
+  <div class="tab-buttons">
+    <button type="button" class="fill" (click)="changerOnglet('dashboard')">Tableau de bord</button>
+    <button type="button" class="fill2" (click)="changerOnglet('compte')">Mon Compte</button>
+    <button type="button" class="fill" (click)="changerOnglet('admin')">Administrateur</button>
+  </div>
+</section>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackgroundComponent } from './background.component';
+import { Accueil2Component } from './accueil2.component';
 
-describe('BackgroundComponent', () => {
-  let component: BackgroundComponent;
-  let fixture: ComponentFixture<BackgroundComponent>;
+describe('Accueil2Component', () => {
+  let component: Accueil2Component;
+  let fixture: ComponentFixture<Accueil2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BackgroundComponent]
+      imports: [Accueil2Component]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BackgroundComponent);
+    fixture = TestBed.createComponent(Accueil2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

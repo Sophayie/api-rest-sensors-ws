@@ -1,0 +1,71 @@
+.temperature-container {
+  font-family: var(--font-texte);
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.temperature-ligne {
+  display: flex;
+  justify-content: center; /* centré au lieu de space-between */
+  align-items: center;
+  gap: 50px; /* distance réduite entre le titre et la valeur */
+  margin-bottom: 6px;
+}
+
+.temperature-ligne h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.temperature-valeur {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-group button {
+  padding: 6px 12px;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-group button:hover {
+  background-color: #94a8808f;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--accent-color);
+  margin: 20px 0;
+  font-family: var(--font-texte);
+  font-size: 1.0rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #555;
+  margin: 0 10px;
+}
+
+.divider span {
+  font-weight: 500;
+  color: #ccc;
+}

@@ -1,0 +1,26 @@
+<section class="formulaire_inscription">
+  <section class="FormulaireInscription">
+    <h1>Inscription</h1>
+    <p>Déjà inscrit? Connecte-toi <a href="index.html" class="connexion">ici</a></p>
+
+    <form [formGroup]="applyForm" (ngSubmit)="submitInscription()">
+      <label for="fname">Prénom:</label><br>
+      <input type="text" id="fname" formControlName="firstname"><br>
+
+
+      <label for="lname">Nom:</label><br>
+      <input type="text" id="lname" formControlName="lastname"><br>
+
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" formControlName="email"><br>
+
+
+      <label for="motdepasse">Mot de passe :</label><br>
+      <input type="password" id="motdepasse" formControlName="password"><br>
+
+
+      <button type="submit" class="fill">S'inscrire</button>
+    </form>
+  </section>
+</section>

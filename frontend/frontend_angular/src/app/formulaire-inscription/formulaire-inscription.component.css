@@ -1,0 +1,99 @@
+.FormulaireInscription {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding: 40px;
+  text-align: center;
+  width: 80%;
+  margin-top: 0;
+}
+
+.FormulaireInscription h1 {
+  font-size: 2.0rem;
+  color: var(--accent-color2);
+  font-family: var(--font-titre);
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.FormulaireInscription label {
+  color: var(--accent-color2);
+  font-size: 1.0rem;
+  font-family: var(--font-texte);
+
+}
+
+.FormulaireInscription input {
+  margin: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  z-index: 10;
+  border: 1px solid var(--accent-color2);
+  background-color: var(--neutral-color);
+}
+
+.FormulaireInscription input:focus {
+  outline: none;
+  border: 2px solid var(--accent-color2);
+  box-shadow: 0 0 5px var(--accent-color2);
+  background-color: var(--neutral-color);
+}
+
+
+.FormulaireInscription p {
+  font-size: 1.1rem;
+  padding-bottom: 5px;
+  font-family: var(--font-texte);
+  color: var(--accent-color2);
+}
+
+.FormulaireInscription a {
+  color: var(--neutral-color)
+}
+
+
+.fill {
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid var(--accent-color2);
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  font-family: var(--font-texte);
+  font-size: 1.1rem;
+  color: var(--accent-color2);
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: 20px;
+}
+
+.fill::after {
+  content: "";
+  background-color: var(--neutral-color);
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.fill:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+.bordure,
+.background {
+  pointer-events: none;
+}

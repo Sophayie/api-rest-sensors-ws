@@ -1,0 +1,15 @@
+<div class="divider" id="humidity">Humidité</div>
+<div class="humidite-container">
+  <div class="humidite-ligne">
+    <h3>humidité actuelle</h3>
+    <span class="humidite-valeur">23.5%</span>
+  </div>
+      <div class="btn-group">
+      <button>Rafraîchir</button>
+      <button>Historique</button>
+    </div>
+</div>
+<div class="range-slider">
+  <input #rangeInput type="range" min="0%" max="100%" [value]="valeur" (input)="onInput()" />
+  <span #rangeValue class="range-value">{{ valeur }}</span>
+</div>
