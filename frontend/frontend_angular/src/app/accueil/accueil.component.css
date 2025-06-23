@@ -1,12 +1,12 @@
 .bodyAccueil {
     display: flex;
     flex-direction: row;
-    gap: 120px;
+    gap: 40px;
 }
 
 .section-serre {
-    margin-top: 100px;
-    margin-left: 200px;
+    margin-top: 70px;
+    margin-left: 0px;
 }
 
 .formulaire {
@@ -27,7 +27,7 @@
 .section-formulaire {
     position: absolute;
     top: 50%;
-    left: 80%;
+    left: 68%;
     z-index: 1;
     transform: translate(-50%, -50%);
     width: 100%;

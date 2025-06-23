@@ -1,49 +1,37 @@
-<h1>Admin - Gestion</h1>
+<h2>Créer un utilisateur</h2>
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Mot de passe</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" id="firstName"></td>
+      <td><input type="text" id="lastName"></td>
+      <td><input type="email" id="email"></td>
+      <td><input type="password" id="motdepasse"></td>
+      <td><button onclick="ajouterUtilisateur()">Ajouter</button></td>
+    </tr>
+  </tbody>
+</table>
 
-  <h2>Gestion des utilisateurs</h2>
-  <table border="1" cellpadding="8">
-    <thead>
-      <tr>
-        <th>Prénom</th>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Mot de passe</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="utilisateurs"></tbody>
-  </table>
-
-  <h2>Rechercher un capteur par ID</h2>
-  <input type="text" id="rechercheCapteurId" placeholder="ID du capteur">
-  <button onclick="rechercherCapteurParId()">Rechercher</button>
-  <div id="resultatRecherche"></div>
-
-  <h2>Liste des 10 derniers capteurs</h2>
-  <table border="1" cellpadding="8">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Type</th>
-        <th>Unité</th>
-        <th>Utilisateur</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="capteurs"></tbody>
-  </table>
-  <h2>Liste complète des mesures</h2>
-  <input type="text" id="filtreCapteur" placeholder="Filtrer par ID capteur">
-  <table border="1" cellpadding="8">
-    <thead>
-      <tr>
-        <th>Valeur</th>
-        <th>Capteur</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="mesures"></tbody>
-  </table>
-
+<h2>Liste des utilisateurs créés</h2>
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Mot de passe</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="liste-utilisateurs">
+    <!-- Remplissage dynamique -->
+  </tbody>
+</table>

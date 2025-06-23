@@ -20,3 +20,47 @@ html, body {
   --font-titre: 'Cormorant Infant', sans-serif;
   --font-texte: 'Lora', serif;
 }
+
+.bodyAccueil {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.section-serre,
+.formulaire {
+  flex: 1 1 400px;
+  max-width: 600px;
+}
+
+/* RESPONSIVE : sur petit écran, empiler les deux sections */
+@media (max-width: 100px) {
+  .bodyAccueil {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .formulaire {
+    width: 90%;
+  }
+
+  .section-serre {
+    width: 90%;
+  }
+
+  .section-formulaire {
+    width: 100%;
+  }
+
+  .backgroundFormulaire {
+    display: none; /* ou adapte selon ce que tu veux */
+  }
+}

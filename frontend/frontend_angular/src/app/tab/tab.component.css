@@ -89,5 +89,35 @@
     left: 0;
 }
 
+h2 {
+    font-family: var(--font-titre);
+    font-size: 2.0rem;
+    color: var(--neutral-color);
+    font-weight: lighter;
+}
 
+.ligne-separation {
+  width: 500px;
+  height: 2px;
+  background: var(--neutral-color);
+  margin: 10px auto 20px auto;
+  border-radius: 100px;
+  box-shadow: 0 0 6px rgba(245, 241, 231, 0.3);
+  opacity: 0.8;
+}
+
+.conteneur-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+}
+
+.ligne-separation {
+  margin-bottom: 50px; /* 🔽 réduit l’espace en dessous de la ligne */
+}
+
+.conteneur-capteur {
+  margin-top: 0 !important; /* 🔨 au cas où `app-capteur` en met un */
+} 
 
