@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema({
   isAdmin: {
     type: Boolean,
     default: false
+  },
+  serre: {
+    nom: { type: String, default: '' } //  Nouveau champ pour le nom de la serre
   }
 }, {
   timestamps: true // Ajoute createdAt et updatedAt automatiquement

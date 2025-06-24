@@ -12,7 +12,7 @@
       <app-compte></app-compte>
     </ng-container>
 
-    <ng-container *ngIf="ongletActif === 'admin'">
+    <ng-container *ngIf="ongletActif === 'admin' && isAdmin">
       <h2>Administrateur</h2>
       <div class="ligne-separation"></div>
       <app-administateur></app-administateur>
@@ -22,6 +22,6 @@
   <div class="tab-buttons">
     <button type="button" class="fill" (click)="changerOnglet('dashboard')">Tableau de bord</button>
     <button type="button" class="fill2" (click)="changerOnglet('compte')">Mon Compte</button>
-    <button type="button" class="fill" (click)="changerOnglet('admin')">Administrateur</button>
+    <button *ngIf="isAdmin" type="button" class="fill" (click)="changerOnglet('admin')">Administrateur</button>
   </div>
 </section>

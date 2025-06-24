@@ -1,24 +1,32 @@
 <h2>Créer un utilisateur</h2>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr>
-      <th>Prénom</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Mot de passe</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><input type="text" id="firstName"></td>
-      <td><input type="text" id="lastName"></td>
-      <td><input type="email" id="email"></td>
-      <td><input type="password" id="motdepasse"></td>
-      <td><button onclick="ajouterUtilisateur()">Ajouter</button></td>
-    </tr>
-  </tbody>
-</table>
+<form (ngSubmit)="ajouterUtilisateur()">
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Mot de passe</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" [(ngModel)]="nouvelUtilisateur.firstName" name="prenom" placeholder="Prénom"></td>
+        <td><input type="text" [(ngModel)]="nouvelUtilisateur.lastName" name="nom" placeholder="Nom"></td>
+        <td><input type="email" [(ngModel)]="nouvelUtilisateur.email" name="email" placeholder="Email"></td>
+        <td><input type="password" [(ngModel)]="nouvelUtilisateur.motdepasse" name="motdepasse"
+            placeholder="Mot de passe"></td>
+        <td>
+          <button type="submit"
+            [disabled]="!nouvelUtilisateur.firstName || !nouvelUtilisateur.lastName || !nouvelUtilisateur.email || !nouvelUtilisateur.motdepasse">
+            Ajouter
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
 
 <h2>Liste des utilisateurs créés</h2>
 <table border="1" cellpadding="8">
@@ -27,11 +35,91 @@
       <th>Prénom</th>
       <th>Nom</th>
       <th>Email</th>
-      <th>Mot de passe</th>
+      <th *ngIf="editeEnCours">Mot de passe</th>
       <th>Action</th>
     </tr>
   </thead>
-  <tbody id="liste-utilisateurs">
-    <!-- Remplissage dynamique -->
+  <tbody>
+    <tr *ngFor="let u of utilisateurs">
+      <ng-container *ngIf="editeEnCours === u._id; else lecture">
+        <td><input [(ngModel)]="u.firstName" /></td>
+        <td><input [(ngModel)]="u.lastName" /></td>
+        <td><input [(ngModel)]="u.email" /></td>
+        <td>
+          <input [(ngModel)]="u.nouveauMotDePasse" type="password" placeholder="Nouveau mot de passe (optionnel)" />
+        </td>
+        <td class="action-buttons">
+          <button (click)="validerEdition(u)">Valider</button>
+          <button (click)="annulerEdition()">Annuler</button>
+        </td>
+      </ng-container>
+
+      <ng-template #lecture>
+        <td>{{ u.firstName }}</td>
+        <td>{{ u.lastName }}</td>
+        <td>{{ u.email }}</td>
+        <td *ngIf="editeEnCours"></td>
+        <td>
+          <button (click)="activerEdition(u._id)">Modifier</button>
+          <button (click)="supprimerUtilisateur(u)">Supprimer</button>
+        </td>
+      </ng-template>
+
   </tbody>
+</table>
+
+<h2>Liste des serres par utilisateur</h2>
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Utilisateur</th>
+      <th>Nom de la serre</th>
+      <th>Capteur Température</th>
+      <th>­ Capteur Humidité</th>
+      <th>Capteur Lampe</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tbody>
+    <tr *ngFor="let utilisateur of utilisateurs">
+  <td>{{ utilisateur.firstName }} {{ utilisateur.lastName }}</td>
+
+  <!-- Nom de la serre -->
+<td>
+  <div>
+    <span *ngIf="editeSerreId !== utilisateur._id">{{ utilisateur.serre?.nom || '—' }}</span>
+    <input *ngIf="editeSerreId === utilisateur._id" [(ngModel)]="utilisateur.serre.nom" />
+  </div>
+  <div style="margin-top: 6px;">
+    <button *ngIf="editeSerreId !== utilisateur._id" (click)="activerEditionSerre(utilisateur._id)">Modifier</button>
+    <button *ngIf="editeSerreId === utilisateur._id" (click)="validerNomSerre(utilisateur)">Valider</button>
+    <button *ngIf="editeSerreId === utilisateur._id" (click)="annulerEditionSerre()">Annuler</button>
+    <button (click)="supprimerSerre(utilisateur)">Supprimer</button>
+  </div>
+</td>
+
+  <!-- Capteurs (laissés vides ou zéro par défaut) -->
+<!-- Capteur Température -->
+<td>
+  {{ compterCapteurs(utilisateur._id, 'temperature') }}
+  <button (click)="ajouterCapteur(utilisateur._id, 'temperature')">+</button>
+  <button (click)="supprimerDernierCapteur(utilisateur._id, 'temperature')">−</button>
+</td>
+
+<!-- Capteur Humidité -->
+<td>
+  {{ compterCapteurs(utilisateur._id, 'humidity') }}
+  <button (click)="ajouterCapteur(utilisateur._id, 'humidity')">+</button>
+  <button (click)="supprimerDernierCapteur(utilisateur._id, 'humidity')">−</button>
+</td>
+
+<!-- Capteur Lampe -->
+<td>
+  {{ compterCapteurs(utilisateur._id, 'led') }}
+  <button (click)="ajouterCapteur(utilisateur._id, 'led')">+</button>
+  <button (click)="supprimerDernierCapteur(utilisateur._id, 'led')">−</button>
+</td>
+
+
+</tr>
 </table>

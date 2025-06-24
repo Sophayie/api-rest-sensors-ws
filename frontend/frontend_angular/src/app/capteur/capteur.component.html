@@ -1,18 +1,28 @@
 <section class="bodyCapteur">
-    <h2>Nom de la serre:</h2>
-    <p><strong>Nom actuel :</strong> <span id="nomActuelCapteur">–</span></p>
-    <div class="changer-nom-capteur">
-        <input type="text" id="champNomCapteur" placeholder="Nouveau nom de la serre" />
-        <button onclick="modifierNomCapteur()">Modifier le nom</button>
-        <p id="messageNomCapteur"></p>
-    </div>
-    <div class="temperature">
-        <app-temperature></app-temperature>
-    </div>
-    <div class="humidimetre">
-        <app-humidimetre></app-humidimetre>
-    </div>
-    <div class="lumiere">
-        <app-lampe></app-lampe>
-    </div>
+  <h2>Nom de la serre:</h2>
+  <p><strong>Nom actuel :</strong> <span>{{ nomSerre }}</span></p>
+
+  <!-- Ajoute ceci pour permettre à tous les utilisateurs de modifier le nom -->
+  <div class="changer-nom-capteur">
+    <input type="text" [(ngModel)]="nouveauNom" placeholder="Nouveau nom de la serre" />
+    <button (click)="modifierNomCapteur()">Modifier le nom</button>
+    <p>{{ messageNom }}</p>
+  </div>
+
+  <!-- Capteurs -->
+
+  <!-- Température -->
+  <div class="temperature" *ngFor="let capteur of capteurs">
+    <app-temperature *ngIf="capteur.type === 'temperature'"></app-temperature>
+  </div>
+
+  <!-- Humidité -->
+  <div class="humidimetre" *ngFor="let capteur of capteurs">
+    <app-humidimetre *ngIf="capteur.type === 'humidity'"></app-humidimetre>
+  </div>
+
+  <!-- Lampe -->
+  <div class="lumiere" *ngFor="let capteur of capteurs">
+    <app-lampe *ngIf="capteur.type === 'led'"></app-lampe>
+  </div>
 </section>

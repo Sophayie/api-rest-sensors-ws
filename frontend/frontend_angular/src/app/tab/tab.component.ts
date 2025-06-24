@@ -5,18 +5,25 @@ import { BackgroundDashboardComponent } from '../background-dashboard/background
 import { AdministateurComponent } from '../administateur/administateur.component';
 import { CapteurComponent } from '../capteur/capteur.component';
 
+
 @Component({
   selector: 'app-tab',
-  standalone: true,              
-  imports: [CommonModule,CompteComponent,BackgroundDashboardComponent,AdministateurComponent,CapteurComponent],       
+  standalone: true,
+  imports: [CommonModule, CompteComponent, BackgroundDashboardComponent, AdministateurComponent, CapteurComponent],
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.css']
 })
 
 export class TabComponent {
-  ongletActif: string = 'dashboard';  
+  ongletActif = 'dashboard';
+  isAdmin = false;
+
+  ngOnInit(): void {
+    this.isAdmin = localStorage.getItem('isAdmin') === 'true';
+  }
 
   changerOnglet(nom: string) {
     this.ongletActif = nom;
   }
 }
+

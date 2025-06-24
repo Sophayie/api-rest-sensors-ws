@@ -10,7 +10,8 @@ const {
   replaceUser,
   loginUser,
   deleteUser,
-  getUserById
+  getUserById,
+  publicRegister
 } = require('../controllers/userController');
 
 // Middleware de validation
@@ -24,20 +25,29 @@ const { auth } = require('../middlewares/authMiddleware');
 // Middleware d'administration
 const { isAdmin } = require('../middlewares/adminMiddleware');
 
-// GET /api/users/:id --> Récupérer un utilisateur par son ID
-router.get('/:id', auth, isAdmin, getUserById);  // Uniquement pour les administrateurs
+// Route publique d’inscription (devient admin)
+router.post('/register', validateUserFields, publicRegister);
 
-// POST /api/users --> Ajouter un utilisateur
-router.post('/', auth, isAdmin, validateUserFields, createUser);  // Uniquement pour les administrateurs
+// GET /api/users/:id --> Récupérer un utilisateur par son ID
+router.patch('/:id', auth, updateUser);  // Uniquement pour les administrateurs
+
+
+// POST /api/users --> Créer un utilisateur (admin uniquement)
+router.post('/', auth, isAdmin, validateUserFields, createUser);
 
 // POST /api/users/create-admin --> Créer un administrateur
-router.post('/create-admin', validateUserFields, createAdmin); 
+router.post('/create-admin', validateUserFields, createAdmin);
 
 // GET /api/users --> Liste des utilisateurs
 router.get('/', auth, isAdmin, getAllUsers); // Uniquement pour les administrateurs
 
-// PATCH /api/users/:id --> Modifier un ou plusieurs champs
-router.patch('/:id', auth, isAdmin, updateUser); // Uniquement pour les administrateurs
+router.get('/:id', auth, (req, res) => {
+  if (req.user.isAdmin || req.user._id.toString() === req.params.id) {
+    return getUserById(req, res);
+  } else {
+    return res.status(403).json({ message: "Accès refusé." });
+  }
+});
 
 // PUT /api/users/:id --> Remplacer un utilisateur
 router.put('/:id', auth, isAdmin, validateUserFields, replaceUser); // Uniquement pour les administrateurs

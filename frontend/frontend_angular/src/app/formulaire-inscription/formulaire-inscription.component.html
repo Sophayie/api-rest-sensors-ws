@@ -2,6 +2,8 @@
   <section class="FormulaireInscription">
     <h1>Inscription</h1>
     <p>Déjà inscrit? Connecte-toi <a href="index.html" class="connexion">ici</a></p>
+    <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
 
     <form [formGroup]="applyForm" (ngSubmit)="submitInscription()">
       <label for="fname">Prénom:</label><br>
@@ -21,6 +23,7 @@
 
 
       <button type="submit" class="fill">S'inscrire</button>
+
     </form>
   </section>
 </section>

@@ -2,11 +2,12 @@
     <h2>Mon compte</h2>
     <div class="ligne-separation"></div>
     <div class='sectionCompte'>
-        <p>Prénom : <span id="nomUtilisateur">[à remplir]</span></p>
-        <p><strong>Nom complet :</strong> <span id="nomCompletUtilisateur">–</span></p>
-        <p><strong>Email :</strong> <span id="emailUtilisateur">–</span></p>
-        <p>*Veillez contacter votre administrateur pour changer vos informations de votre compte.</p>
+        <p>Prénom : <span>{{ firstName }}</span></p>
+        <p><strong>Nom complet :</strong> <span>{{ lastName }}</span></p>
+        <p><strong>Email :</strong> <span>{{ email }}</span></p>
+        <p *ngIf="!isAdmin">
+            *Veuillez contacter votre administrateur pour changer vos informations de votre compte.
+        </p>
     </div>
-<button type="button" class="fill">Se déconnecter</button>
+    <button type="button" class="fill" (click)="seDeconnecter()">Se déconnecter</button>
 </section>
-

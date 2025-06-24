@@ -1,21 +1,19 @@
-const app = require('./app');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const connectDB = require('./config/db'); 
+const app = require('./app'); 
 
-// Chargement des variables d'environnement
+// Chargement du fichier .env
 dotenv.config();
+console.log(process.env.PORT);
 
-// Connexion à la base de données
+// Connexion à MongoDB
 connectDB();
 
-// Lecture du port dans .env ou fallback sur 3000
+// Lancement du serveur HTTP
 const PORT = process.env.PORT || 3000;
-
-// Démarrage du serveur Express
 app.listen(PORT, () => {
-  console.log(`Serveur Express démarré sur http://localhost:${PORT}`);
+  console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });
 
-// Démarrage du serveur WebSocket
+// Si tu démarres aussi WebSocket
 require('./wsServer');
-
