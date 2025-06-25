@@ -12,17 +12,16 @@
   <!-- Capteurs -->
 
   <!-- Température -->
-  <div class="temperature" *ngFor="let capteur of capteurs">
-    <app-temperature *ngIf="capteur.type === 'temperature'"></app-temperature>
-  </div>
+  <ng-container *ngFor="let capteur of capteurs">
+    <app-temperature *ngIf="capteur.type === 'temperature'" [sensorId]="capteur._id"></app-temperature>
+  </ng-container>
 
   <!-- Humidité -->
-  <div class="humidimetre" *ngFor="let capteur of capteurs">
-    <app-humidimetre *ngIf="capteur.type === 'humidity'"></app-humidimetre>
-  </div>
+  <ng-container *ngFor="let capteur of capteurs">
+    <app-humidimetre *ngIf="capteur.type === 'humidity'" [sensorId]="capteur._id"></app-humidimetre>
+  </ng-container>
 
   <!-- Lampe -->
-  <div class="lumiere" *ngFor="let capteur of capteurs">
-    <app-lampe *ngIf="capteur.type === 'led'"></app-lampe>
-  </div>
-</section>
+  <ng-container *ngFor="let capteur of capteurs">
+    <app-lampe *ngIf="capteur.type === 'led'" [sensorId]="capteur._id"></app-lampe>
+  </ng-container>

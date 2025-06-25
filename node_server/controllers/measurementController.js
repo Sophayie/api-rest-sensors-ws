@@ -1,14 +1,35 @@
 const Measurement = require('../models/Measurement');
+const { sendCommandToDevice } = require('../wsServer');
+const mongoose = require('mongoose');
+const Sensor = require('../models/Sensor');
 
 // POST /api/measurements --> Ajouter une mesure
 const createMeasurement = async (req, res) => {
   try {
     const measurement = await Measurement.create(req.body);
+
+    // Recherche du capteur lié à cette mesure
+    const sensor = await Sensor.findById(measurement.sensorId);
+
+    // Si c’est une LED, on envoie la commande via WebSocket
+    if (sensor?.type === 'led' && sensor.deviceId) {
+      const sensor = await Sensor.findById(measurement.sensorId);
+      console.log('[DEBUG] sensor récupéré :', sensor);
+      sendCommandToDevice(sensor.deviceId, {
+        sensorId: sensor._id,
+        value: measurement.value
+      });
+
+      
+      console.log(`[WS] Commande envoyée à ${sensor.deviceId} pour LED : ${measurement.value}`);
+    }
+
     res.status(201).json(measurement);
   } catch (error) {
     res.status(400).json({ message: 'Erreur lors de la création', error: error.message });
   }
 };
+
 
 // GET /api/measurements --> Liste complète
 const getAllMeasurements = async (req, res) => {

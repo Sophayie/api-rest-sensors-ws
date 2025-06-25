@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, Input } from '@angular/core';
 
 @Component({
   selector: 'app-humidimetre',
@@ -7,6 +7,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class HumidimetreComponent implements AfterViewInit {
   @ViewChild('rangeInput') rangeInputRef!: ElementRef<HTMLInputElement>;
+  @Input() sensorId!: string;
 
   valeur: number = 0;
 
