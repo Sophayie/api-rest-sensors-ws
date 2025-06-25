@@ -9,21 +9,25 @@ const sensorSchema = new mongoose.Schema({
   type: {
     type: String,
     required: [true, 'Le type est requis'],
-    enum: ['temperature', 'humidity', 'led'], // à adapter selon nos capteurs
+    enum: ['temperature', 'humidity', 'led'],
   },
   unit: {
     type: String,
     required: function () {
-      return this.type !== 'led'; // facultatif pour la led
+      return this.type !== 'led';
     }
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,  // Ce champ userId contiendra un identifiant (_id) d’un document qui vient de la collection users
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  deviceId: {                                
+    type: String,
+    required: false
   }
 }, {
-  timestamps: true // ajoute createdAt et updatedAt
+  timestamps: true                           
 });
 
 module.exports = mongoose.model('Sensor', sensorSchema);

@@ -2,13 +2,18 @@ const Sensor = require('../models/Sensor'); // ← Ne pas redéclarer plus bas
 
 // POST /api/sensors --> Créer un capteur
 const createSensor = async (req, res) => {
-  console.log('Données reçues :', req.body);
-  try {
-    const sensor = await Sensor.create(req.body);
-    res.status(201).json(sensor);
-  } catch (error) {
-    res.status(400).json({ message: 'Erreur lors de la création', error: error.message });
-  }
+  const { name, type, unit, userId } = req.body;
+
+  const sensor = new Sensor({
+    name,
+    type,
+    unit,
+    userId,
+    deviceId: "rpi-007" 
+  });
+
+  await sensor.save();
+  res.status(201).json(sensor);
 };
 
 // GET /api/sensors --> Liste de tous les capteurs
