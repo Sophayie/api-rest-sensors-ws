@@ -1,6 +1,7 @@
 import websocket
 import yaml
 import json
+import time
 from datetime import datetime
 from gpio.led import led_on, led_off
 
@@ -45,6 +46,8 @@ def on_message(ws, message):
             if humidity > HUMIDITY_THRESHOLD:
                 print("[!] Seuil dépassé. LED activée")
                 led_on(LED_HUMIDITY_PIN)
+                time.sleep(5)
+                led_off(LED_HUMIDITY_PIN)
             else:
                 led_off(LED_HUMIDITY_PIN)
             
