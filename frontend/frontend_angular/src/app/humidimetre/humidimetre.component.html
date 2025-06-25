@@ -2,14 +2,26 @@
 <div class="humidite-container">
   <div class="humidite-ligne">
     <h3>humidité actuelle</h3>
-    <span class="humidite-valeur">23.5%</span>
+    <span class="humidite-valeur">{{ valeur }}%</span>
   </div>
       <div class="btn-group">
-      <button>Rafraîchir</button>
-      <button>Historique</button>
+      <button (click)="rafraichir()">Rafraîchir</button>
+      <button (click)="voirHistorique()">Historique</button>
     </div>
+  <div *ngIf="afficherHistorique">
+  <h4>Historique :</h4>
+  <ul>
+    <li *ngFor="let mesure of historique">
+      {{ mesure.takenAtLocal }} — {{ mesure.value }} %
+    </li>
+  </ul>
+</div>
 </div>
 <div class="range-slider">
-  <input #rangeInput type="range" min="0%" max="100%" [value]="valeur" (input)="onInput()" />
+  <input #rangeInput type="range" min="0" max="100" 
+          [value]="valeur" 
+          (input)="onInput()" 
+          (change)="envoyer()" />
   <span #rangeValue class="range-value">{{ valeur }}</span>
 </div>
+

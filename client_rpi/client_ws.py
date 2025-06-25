@@ -13,6 +13,10 @@ WS_URL = config["ws_url"]
 LED_CONTROL_PIN = config["gpio"]["led_control_pin"]
 LED_SENSOR_ID = config["sensor_ids"].get("led")
 
+LED_HUMIDITY_PIN = config["gpio"]["led_humidity_pin"]
+HUMIDITY_SENSOR_ID = config["sensor_ids"].get("humidity")
+HUMIDITY_THRESHOLD = config["thresholds"]["humidity"]
+
 ws = None
 is_connected = False
 
@@ -20,16 +24,32 @@ def on_message(ws, message):
     print("Commande reçue :", message)
     try:
         data = json.loads(message)
+        sensor_id = data.get("sensorId")
+        value = data.get("value")
 
-        if data.get("sensorId") == LED_SENSOR_ID:
-            if data.get("value") in ["on", "1", 1]: 
+        if sensor_id == LED_SENSOR_ID:
+            if value in ["on", "1", 1]: 
                 led_on(LED_CONTROL_PIN)
+                print("LED allumée")
                 send_measurement(LED_SENSOR_ID, 1)
-            elif data.get("value") in ["off", "0", 0]: 
+            elif value in ["off", "0", 0]: 
                 led_off(LED_CONTROL_PIN)
+                print("LED éteinte")
                 send_measurement(LED_SENSOR_ID, 0)                
             else:
                 print("[!] Commande inconnue :", data.get("value"))
+        
+        elif sensor_id == HUMIDITY_SENSOR_ID:
+            humidity = int(value)
+            print(f"Commande d'humidité reçue : {humidity}%")
+            if humidity > HUMIDITY_THRESHOLD:
+                print("[!] Seuil dépassé. LED activée")
+                led_on(LED_HUMIDITY_PIN)
+            else:
+                led_off(LED_HUMIDITY_PIN)
+            
+            send_measurement(HUMIDITY_SENSOR_ID, humidity)
+
         else:
             print("[!] Ignorée : sensorId ≠ LED")
 

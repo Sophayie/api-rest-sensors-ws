@@ -2,10 +2,19 @@
 <div class="temperature-container">
   <div class="temperature-ligne">
     <h3>Température actuelle</h3>
-    <span class="temperature-valeur">23.5°C</span>
+    <span class="temperature-valeur">{{ temperature }}°C</span>
   </div>
   <div class="btn-group">
-    <button>Rafraîchir</button>
-    <button>Historique</button>
+    <button (click)="rafraichir()">Rafraîchir</button>
+    <button (click)="voirHistorique()">Historique</button>
   </div>
+  <div *ngIf="afficherHistorique">
+  <h4>Historique :</h4>
+  <ul>
+    <li *ngFor="let mesure of historique">
+      {{ mesure.takenAtLocal }} — {{ mesure.value }} °C
+    </li>
+  </ul>
+</div>
+
 </div>

@@ -6,7 +6,6 @@ sensor_ids:
   temperature: "68539a48ec634899b9fc4b1e"
   humidity: "68539a57ec634899b9fc4b20"
   led: "685b4a74db644df6394f5756"  
-"  
 
 gpio:
   temp_pin: 4               # DHT11 (GPIO 4)

@@ -33,12 +33,12 @@ export class LampeComponent implements OnInit {
   toggleLampe() {
     const nouvelleValeur = this.etatLampe ? 0 : 1;
 
-    this.measurementService.envoyerMesure(this.sensorId, nouvelleValeur).subscribe({
+    this.measurementService.envoyerCommande(this.sensorId, nouvelleValeur).subscribe({
       next: () => {
         this.etatLampe = !this.etatLampe;
       },
       error: (err) => {
-        console.error("Erreur lors de l'envoi de la mesure :", err);
+        console.error("Erreur lors de l'envoi de la commande :", err);
       }
     });
   }
