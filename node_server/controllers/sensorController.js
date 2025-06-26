@@ -1,4 +1,4 @@
-const Sensor = require('../models/Sensor'); // ← Ne pas redéclarer plus bas
+const Sensor = require('../models/Sensor'); 
 
 // POST /api/sensors --> Créer un capteur
 const createSensor = async (req, res) => {
@@ -23,7 +23,7 @@ const getAllSensors = async (req, res) => {
   }
 };
 
-// GET /api/sensors/:id --> Obtenir un capteur par ID (💡 ce que tu voulais pour afficher un capteur)
+// GET /api/sensors/:id --> Obtenir un capteur par ID 
 const getSensorById = async (req, res) => {
   try {
     const sensor = await Sensor.findById(req.params.id).populate('userId', 'firstName lastName');
