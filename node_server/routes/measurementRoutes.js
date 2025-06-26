@@ -7,7 +7,8 @@ const {
   getMeasurementsBySensor,
   updateMeasurement,
   replaceMeasurement,
-  getLatestMeasurementBySensor
+  getLatestMeasurementBySensor,
+  deleteMeasurement 
 } = require('../controllers/measurementController');
 
 const {
@@ -33,5 +34,8 @@ router.patch('/:id', auth, isAdmin, updateMeasurement); // Uniquement pour les a
 router.put('/:id', auth, isAdmin, validateMeasurementFields, replaceMeasurement); // Uniquement pour les administrateurs
 
 router.get('/latest/sensorId/:sensorId', auth, getLatestMeasurementBySensor);
+
+// DELETE /api/measurements/:id → Supprimer une mesure
+router.delete('/:id', auth, isAdmin, deleteMeasurement);
 
 module.exports = router;

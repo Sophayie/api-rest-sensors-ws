@@ -86,6 +86,16 @@ export class MeasurementService {
     return this.http.put(`${this.apiUrl}/${id}`, nouvelleMesure, { headers });
   }
 
+  deleteMeasurement(id: string) {
+    return this.http.delete(`/api/measurements/${id}`);
+  }
+  envoyerCommandeLampe(sensorId: string, value: number) {
+    return this.http.post('/api/measurements', {
+      sensorId,
+      value
+    });
+  }
+
 }
 
 

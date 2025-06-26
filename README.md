@@ -31,16 +31,40 @@ API-REST-SENSORS-WS/
 │   ├── app.js                           # Création de l’app Express
 │   └── server.js                        # Démarrage du serveur Express (écoute du port)
 │
-├── frontend/                            # Frontend
-│ ├── public/                            # Fichiers statiques accessibles (CSS, JS front-end)
-│   ├── js/                              # Fichiers JavaScript front-end
-│   ├── index.html                       # Page principale du frontend avec connexion
-│   ├── admin.html                       # Page d'administration
-│   ├── dashboard.html                   # Tableau de bord avec affichage des capteurs et mesures
-│   ├── inscription.html                 # Page d'inscription
-│   ├── graphique_humidite.html          # Page de graphique de l'humidité avec Chart.js
-│   ├── styles2.css                      # Styles CSS associés
-│   └── styles.css                       # Styles CSS associés
+├── frontend/                           # Répertoire du frontend Angular
+│   ├── frontend_angular/               # Projet Angular
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   │   ├── accueil/                    # Page d'accueil principale
+│   │   │   │   ├── accueil2/                   # Variante de page d’accueil
+│   │   │   │   ├── administateur/             # Interface d’administration complète
+│   │   │   │   ├── background-dashboard/      # Fond graphique pour le dashboard
+│   │   │   │   ├── capteur/                   # Logiciel commun aux capteurs
+│   │   │   │   ├── compte/                    # Page "Mon compte"
+│   │   │   │   ├── dashboard/                 # Vue utilisateur avec capteurs
+│   │   │   │   ├── formulaire-connexion/      # Connexion utilisateur
+│   │   │   │   ├── formulaire-inscription/    # Création de compte
+│   │   │   │   ├── header/                    # Barre de navigation
+│   │   │   │   ├── historique-humidite/       # Historique humidité
+│   │   │   │   ├── historique-temperature/    # Historique température
+│   │   │   │   ├── humidimetre/               # Capteur humidité
+│   │   │   │   ├── interceptor/               # Intercepteur HTTP (auth)
+│   │   │   │   ├── lampe/                     # Composant LED
+│   │   │   │   ├── serre/                     # Nom et état de la serre
+│   │   │   │   ├── tab/                       # Onglets dynamiques
+│   │   │   │   ├── temperature/               # Capteur température
+│   │   │   │   ├── app.component.ts|html|css  # Composant principal
+│   │   │   │   ├── app.routes.ts              # Routes Angular
+│   │   │   │   ├── app.config.ts              # Configuration centrale
+│   │   │   │   ├── measurement.service.ts     # Service pour les mesures
+│   │   │   │   ├── sensor.service.ts          # Service pour les capteurs
+│   │   │   │   └── user.service.ts            # Service pour les utilisateurs
+│   │   │   ├── assets/                        # Images, icônes, etc.
+│   │   │   ├── index.html                     # Page racine Angular
+│   │   │   └── styles.css                     # Feuille de style globale
+│   │   ├── angular.json                       # Config Angular CLI
+│   │   ├── package.json                       # Dépendances frontend
+│   │   └── tsconfig.json                      # Configuration TypeScript
 |
 ├── client_rpi/                          # Client embarqué (Raspberry Pi)
 │   ├── sensors/
@@ -74,11 +98,12 @@ Ce projet utilise Node.js pour exécuter un serveur Express (backend) et un serv
 - **ejs** : Moteur de template (si utilisé).
 
 ### Dépendances de développement (`devDependencies`)
-- **http-server** : Pour servir le frontend statique dans `frontend/public`.
+- **http-server** : Pour servir le frontend statique dans `frontend_angular`.
 
 ## ⚙️ Installation et lancement
 
 1. Clonez le dépôt.
 2. Installez les dépendances avec `npm install`.
 4. Lancez le serveur backend avec `npm run start:backend`.
-5. Lancez le serveur frontend avec `npm run start:frontend`.
+5. Lancez le serveur frontend dans le fichier frontend/frontend_angular avec `npm start`.
+6. Lancer le fichier main.py dans le client_rpi

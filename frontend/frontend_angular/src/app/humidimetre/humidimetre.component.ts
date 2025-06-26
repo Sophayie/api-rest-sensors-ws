@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MeasurementService } from '../measurement.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-humidimetre',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './humidimetre.component.html',
   styleUrls: ['./humidimetre.component.scss']
 })
@@ -40,33 +41,6 @@ export class HumidimetreComponent implements AfterViewInit {
       }
     });
   }
-
-  voirHistorique():void {
-    this.afficherHistorique = !this.afficherHistorique;
-    if (this.afficherHistorique) {
-      this.measurementService.getMesuresParCapteur(this.sensorId).subscribe({
-        next: (mesures) => {
-          this.historique = mesures.map((mesure) => {
-            const dateUtc = new Date(mesure.takenAt);
-            const dateMontreal = new Date(dateUtc.getTime() - 4 * 60 * 60 * 1000);
-
-            const jour = String(dateMontreal.getDate()).padStart(2, '0');
-            const mois = String(dateMontreal.getMonth() + 1).padStart(2, '0');
-            const annee = dateMontreal.getFullYear();
-            const heure = String(dateMontreal.getHours()).padStart(2, '0');
-            const minute = String(dateMontreal.getMinutes()).padStart(2, '0');
-
-            const takenAtLocal = `${jour}/${mois}/${annee} à ${heure}:${minute}`;
-            return { ...mesure, takenAtLocal };
-          });
-        },
-        error: (err) => {
-          console.error('Erreur chargement historique humidité :', err);
-        }
-      });
-    }
-  }
-
   envoyer(): void {
     this.measurementService.envoyerCommande(this.sensorId, this.valeur).subscribe({
       next: () => {

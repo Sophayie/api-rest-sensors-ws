@@ -1,4 +1,5 @@
 <div class="divider" id="temperature">Température</div>
+
 <div class="temperature-container">
   <div class="temperature-ligne">
     <h3>Température actuelle</h3>
@@ -6,15 +7,6 @@
   </div>
   <div class="btn-group">
     <button (click)="rafraichir()">Rafraîchir</button>
-    <button (click)="voirHistorique()">Historique</button>
+    <button [routerLink]="['/historiqueTemperature', sensorId]">Historique</button>
   </div>
-  <div *ngIf="afficherHistorique">
-  <h4>Historique :</h4>
-  <ul>
-    <li *ngFor="let mesure of historique">
-      {{ mesure.takenAtLocal }} — {{ mesure.value }} °C
-    </li>
-  </ul>
-</div>
-
 </div>

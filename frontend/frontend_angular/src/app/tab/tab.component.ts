@@ -17,9 +17,18 @@ import { CapteurComponent } from '../capteur/capteur.component';
 export class TabComponent {
   ongletActif = 'dashboard';
   isAdmin = false;
+  utilisateur: any;
 
   ngOnInit(): void {
     this.isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+    
+    this.utilisateur = {
+      firstName: localStorage.getItem('firstName'),
+      lastName: localStorage.getItem('lastName'),
+      email: localStorage.getItem('email'),
+      userId: localStorage.getItem('userId'),
+    };
   }
 
   changerOnglet(nom: string) {

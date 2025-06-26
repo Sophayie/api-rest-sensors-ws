@@ -4,24 +4,12 @@
     <h3>humidité actuelle</h3>
     <span class="humidite-valeur">{{ valeur }}%</span>
   </div>
-      <div class="btn-group">
-      <button (click)="rafraichir()">Rafraîchir</button>
-      <button (click)="voirHistorique()">Historique</button>
-    </div>
-  <div *ngIf="afficherHistorique">
-  <h4>Historique :</h4>
-  <ul>
-    <li *ngFor="let mesure of historique">
-      {{ mesure.takenAtLocal }} — {{ mesure.value }} %
-    </li>
-  </ul>
-</div>
+  <div class="btn-group">
+    <button (click)="rafraichir()">Rafraîchir</button>
+    <button [routerLink]="['/historiqueHumidite', sensorId]">Historique</button>
+  </div>
 </div>
 <div class="range-slider">
-  <input #rangeInput type="range" min="0" max="100" 
-          [value]="valeur" 
-          (input)="onInput()" 
-          (change)="envoyer()" />
+  <input #rangeInput type="range" min="0" max="100" [value]="valeur" (input)="onInput()" (change)="envoyer()" />
   <span #rangeValue class="range-value">{{ valeur }}</span>
 </div>
-

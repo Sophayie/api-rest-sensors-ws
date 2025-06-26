@@ -1,0 +1,18 @@
+<div class="humidite">
+    <h2>Historique de l'humidimètre :</h2>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Valeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mesure of historique">
+                <td>{{ mesure.takenAtLocal }}</td>
+                <td>{{ mesure.value }} %</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

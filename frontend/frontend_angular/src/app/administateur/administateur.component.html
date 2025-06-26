@@ -15,8 +15,7 @@
         <td><input type="text" [(ngModel)]="nouvelUtilisateur.firstName" name="prenom" placeholder="Prénom"></td>
         <td><input type="text" [(ngModel)]="nouvelUtilisateur.lastName" name="nom" placeholder="Nom"></td>
         <td><input type="email" [(ngModel)]="nouvelUtilisateur.email" name="email" placeholder="Email"></td>
-        <td><input type="password" [(ngModel)]="nouvelUtilisateur.motdepasse" name="motdepasse"
-            placeholder="Mot de passe"></td>
+        <td><input type="password" [(ngModel)]="nouvelUtilisateur.motdepasse" name="motdepasse" placeholder="Mot de passe"></td>
         <td>
           <button type="submit"
             [disabled]="!nouvelUtilisateur.firstName || !nouvelUtilisateur.lastName || !nouvelUtilisateur.email || !nouvelUtilisateur.motdepasse">
@@ -45,15 +44,12 @@
         <td><input [(ngModel)]="u.firstName" /></td>
         <td><input [(ngModel)]="u.lastName" /></td>
         <td><input [(ngModel)]="u.email" /></td>
+        <td><input [(ngModel)]="u.nouveauMotDePasse" type="password" placeholder="Nouveau mot de passe (optionnel)" /></td>
         <td>
-          <input [(ngModel)]="u.nouveauMotDePasse" type="password" placeholder="Nouveau mot de passe (optionnel)" />
-        </td>
-        <td class="action-buttons">
           <button (click)="validerEdition(u)">Valider</button>
           <button (click)="annulerEdition()">Annuler</button>
         </td>
       </ng-container>
-
       <ng-template #lecture>
         <td>{{ u.firstName }}</td>
         <td>{{ u.lastName }}</td>
@@ -64,7 +60,7 @@
           <button (click)="supprimerUtilisateur(u)">Supprimer</button>
         </td>
       </ng-template>
-
+    </tr>
   </tbody>
 </table>
 
@@ -75,51 +71,106 @@
       <th>Utilisateur</th>
       <th>Nom de la serre</th>
       <th>Capteur Température</th>
-      <th>­ Capteur Humidité</th>
+      <th>Capteur Humidité</th>
       <th>Capteur Lampe</th>
     </tr>
   </thead>
   <tbody>
-  <tbody>
     <tr *ngFor="let utilisateur of utilisateurs">
-  <td>{{ utilisateur.firstName }} {{ utilisateur.lastName }}</td>
-
-  <!-- Nom de la serre -->
-<td>
-  <div>
-    <span *ngIf="editeSerreId !== utilisateur._id">{{ utilisateur.serre?.nom || '—' }}</span>
-    <input *ngIf="editeSerreId === utilisateur._id" [(ngModel)]="utilisateur.serre.nom" />
-  </div>
-  <div style="margin-top: 6px;">
-    <button *ngIf="editeSerreId !== utilisateur._id" (click)="activerEditionSerre(utilisateur._id)">Modifier</button>
-    <button *ngIf="editeSerreId === utilisateur._id" (click)="validerNomSerre(utilisateur)">Valider</button>
-    <button *ngIf="editeSerreId === utilisateur._id" (click)="annulerEditionSerre()">Annuler</button>
-    <button (click)="supprimerSerre(utilisateur)">Supprimer</button>
-  </div>
-</td>
-
-  <!-- Capteurs (laissés vides ou zéro par défaut) -->
-<!-- Capteur Température -->
-<td>
-  {{ compterCapteurs(utilisateur._id, 'temperature') }}
-  <button (click)="ajouterCapteur(utilisateur._id, 'temperature')">+</button>
-  <button (click)="supprimerDernierCapteur(utilisateur._id, 'temperature')">−</button>
-</td>
-
-<!-- Capteur Humidité -->
-<td>
-  {{ compterCapteurs(utilisateur._id, 'humidity') }}
-  <button (click)="ajouterCapteur(utilisateur._id, 'humidity')">+</button>
-  <button (click)="supprimerDernierCapteur(utilisateur._id, 'humidity')">−</button>
-</td>
-
-<!-- Capteur Lampe -->
-<td>
-  {{ compterCapteurs(utilisateur._id, 'led') }}
-  <button (click)="ajouterCapteur(utilisateur._id, 'led')">+</button>
-  <button (click)="supprimerDernierCapteur(utilisateur._id, 'led')">−</button>
-</td>
-
-
-</tr>
+      <td>{{ utilisateur.firstName }} {{ utilisateur.lastName }}</td>
+      <td>
+        <div>
+          <span *ngIf="editeSerreId !== utilisateur._id">{{ utilisateur.serre?.nom || '—' }}</span>
+          <input *ngIf="editeSerreId === utilisateur._id" [(ngModel)]="utilisateur.serre.nom" />
+        </div>
+        <div style="margin-top: 6px;">
+          <button *ngIf="editeSerreId !== utilisateur._id" (click)="activerEditionSerre(utilisateur._id)">Modifier</button>
+          <button *ngIf="editeSerreId === utilisateur._id" (click)="validerNomSerre(utilisateur)">Valider</button>
+          <button *ngIf="editeSerreId === utilisateur._id" (click)="annulerEditionSerre()">Annuler</button>
+          <button (click)="supprimerSerre(utilisateur)">Supprimer</button>
+        </div>
+      </td>
+      <td>
+        {{ compterCapteurs(utilisateur._id, 'temperature') }}
+        <button (click)="ajouterCapteur(utilisateur._id, 'temperature')">+</button>
+        <button (click)="supprimerDernierCapteur(utilisateur._id, 'temperature')">−</button>
+      </td>
+      <td>
+        {{ compterCapteurs(utilisateur._id, 'humidity') }}
+        <button (click)="ajouterCapteur(utilisateur._id, 'humidity')">+</button>
+        <button (click)="supprimerDernierCapteur(utilisateur._id, 'humidity')">−</button>
+      </td>
+      <td>
+        {{ compterCapteurs(utilisateur._id, 'led') }}
+        <button (click)="ajouterCapteur(utilisateur._id, 'led')">+</button>
+        <button (click)="supprimerDernierCapteur(utilisateur._id, 'led')">−</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+<!-- Section Capteurs par utilisateur -->
+<div *ngFor="let utilisateur of utilisateurs">
+  <h3>Capteur de {{ utilisateur.firstName }} {{ utilisateur.lastName }}</h3>
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Id du capteur</th>
+        <th>Type</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let capteur of capteursParUtilisateur[utilisateur._id]">
+        <td>{{ capteur._id }}</td>
+        <td>{{ capteur.type }}</td>
+        <td>
+          <ng-container [ngSwitch]="capteur.type">
+            <button *ngSwitchCase="'temperature'" (click)="rafraichir(capteur._id)">Rafraîchir</button>
+            <button *ngSwitchCase="'humidity'" (click)="rafraichir(capteur._id)">Rafraîchir</button>
+            <button *ngSwitchCase="'led'" (click)="toggleLampe(capteur)">
+              {{ capteur.etat ? 'Éteindre' : 'Allumer' }}
+            </button>
+            <span *ngSwitchDefault>Aucune action</span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section des mesures globales -->
+<h2>Liste complète des mesures</h2>
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Valeur</th>
+      <th>Capteur</th>
+      <th>Utilisateur</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let m of (afficherTout ? mesures : mesures.slice(0, 5))">
+      <td>{{ m.value }}</td>
+      <td>{{ m.sensorId?._id || m.sensorId }}</td>
+      <td>
+        <ng-container *ngIf="m.sensorId?.userId; else inconnu">
+          {{ m.sensorId.userId.firstName }} {{ m.sensorId.userId.lastName }}
+        </ng-container>
+        <ng-template #inconnu>–</ng-template>
+      </td>
+      <td>{{ m.takenAt | date:'short' }}</td>
+      <td>
+        <button (click)="modifierValeur(m)">Modifier</button>
+        <button (click)="supprimerMesure(m._id)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: center; margin-top: 10px;" *ngIf="mesures.length > 5">
+  <button (click)="afficherTout = !afficherTout">
+    {{ afficherTout ? 'Voir moins' : 'Voir plus' }}
+  </button>
+</div>

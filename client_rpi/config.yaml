@@ -1,6 +1,6 @@
 device_id: "rpi-007"  # Identifiant unique du Pi (doit être enregistré côté serveur)
 
-ws_url: "ws://192.168.0.118:3002"  # Adresse du serveur WebSocket
+ws_url: "ws://10.0.0.177:3002"  # Adresse du serveur WebSocket
 
 sensor_ids:
   temperature: "685b4588a3ef651df62f192b"

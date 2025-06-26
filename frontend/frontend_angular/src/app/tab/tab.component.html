@@ -2,7 +2,7 @@
   <app-background-dashboard>
     <ng-container *ngIf="ongletActif === 'dashboard'">
       <div class="conteneur-dashboard">
-        <h2>Tableau de bord</h2>
+        <h2>Tableau de bord de {{ utilisateur?.firstName }}</h2>
         <div class="ligne-separation"></div>
         <app-capteur></app-capteur>
       </div>
