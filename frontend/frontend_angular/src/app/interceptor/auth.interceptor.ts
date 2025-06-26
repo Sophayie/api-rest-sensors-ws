@@ -1,19 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpErrorResponse
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
+  constructor(private router: Router) {}
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
+    let authReq = req;
 
     if (token) {
-      const authReq = req.clone({
+      authReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
-      return next.handle(authReq);
     }
 
-    return next.handle(req);
+    return next.handle(authReq).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          const confirmation = window.confirm(
+            ' Oups ! Votre session a fané. Voulez-vous vous reconnecter pour raviver votre serre ?'
+          );
+          if (confirmation) {
+            localStorage.removeItem('token');
+            this.router.navigate(['/']);
+          }
+        }
+
+        return throwError(() => error);
+      })
+    );
   }
 }
