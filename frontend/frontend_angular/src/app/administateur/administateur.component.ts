@@ -251,8 +251,21 @@ export class AdministateurComponent implements OnInit {
 
   chargerMesures(): void {
     this.measurementService.getAllMeasurements().subscribe({
-      next: (data) => {
-        this.mesures = data;
+    next: (data) => {
+      this.mesures = data.map((mesure: any) => {
+        const dateUtc = new Date(mesure.takenAt);
+        const dateMontreal = new Date(dateUtc.getTime() - 4 * 60 * 60 * 1000); // Ajustement -4h
+
+        const jour = String(dateMontreal.getDate()).padStart(2, '0');
+        const mois = String(dateMontreal.getMonth() + 1).padStart(2, '0');
+        const annee = dateMontreal.getFullYear();
+        const heure = String(dateMontreal.getHours()).padStart(2, '0');
+        const minute = String(dateMontreal.getMinutes()).padStart(2, '0');
+
+        const takenAtLocal = `${jour}/${mois}/${annee} à ${heure}:${minute}`;
+
+        return { ...mesure, takenAtLocal };
+      });
       },
       error: (err) => {
         console.error('Erreur lors du chargement des mesures :', err);

@@ -161,7 +161,7 @@
         </ng-container>
         <ng-template #inconnu>–</ng-template>
       </td>
-      <td>{{ m.takenAt | date:'short' }}</td>
+      <td>{{ m.takenAtLocal }}</td>
       <td>
         <button (click)="modifierValeur(m)">Modifier</button>
         <button (click)="supprimerMesure(m._id)">Supprimer</button>
