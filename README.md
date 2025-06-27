@@ -1,18 +1,20 @@
-# api-rest-sensors-ws
-Serveur Express pour capteurs IoT avec API REST, WebSocket et authentification JWT + WebClient Interface
+# 🌱 api-rest-sensors-ws
+Serveur Express complet pour la gestion de capteurs IoT avec API REST, WebSocket, authentification JWT et interface utilisateur Angular. Un client embarqué Raspberry Pi permet d’envoyer des mesures physiques ou simulées. Le projet est conçu pour respecter les bonnes pratiques de sécurité et l'architecture MVC.
+
+## 📁 Structure du projet
 
 ```
 API-REST-SENSORS-WS/
 │
 ├── node_server/                         # Serveur Node.js (API REST + interface web)
 │   ├── config/                          # Configuration de la BDD et variables d'environnement
-│   │   ├── db.js                        # Connexion à MongoDB via Mongoose
-│   │   └── .env                         # Variables (URI MongoDB, port, etc.)
+│   │   └── db.js                        # Connexion à MongoDB via Mongoose
 │   │
-│   ├── controllers/                     # Logique des routes (séparé des routes)
-│   │   ├── userController.js
-│   │   ├── sensorController.js
-│   │   └── measurementController.js
+│   ├── controllers/                     # Logique métier des routes 
+│   │   ├── userController.js            
+│   │   ├── sensorController.js          
+│   │   ├── measurementController.js     
+│   │   └── commandController.js         
 │   │
 │   ├── models/                          # Schémas Mongoose
 │   │   ├── User.js
@@ -22,14 +24,18 @@ API-REST-SENSORS-WS/
 │   ├── routes/                          # Définition des routes de l’API REST
 │   │   ├── userRoutes.js
 │   │   ├── sensorRoutes.js
-│   │   └── measurementRoutes.js
+│   │   ├── measurementRoutes.js
+│   │   └── commandRoutes.js
 │   │
 │   ├── middlewares/                     # Middlewares personnalisés
-│   │   ├── validationMiddleware.js
-│   │   └── loggerMiddleware.js
+│   │   ├── validationMiddleware.js      # Validation des données
+│   │   ├── loggerMiddleware.js          # Logging des requêtes HTTP
+│   │   ├── authMiddleware.js            # Authentification JWT
+│   │   └── adminMiddleware.js           # Vérification des droits d'administration
 │   │
 │   ├── app.js                           # Création de l’app Express
-│   └── server.js                        # Démarrage du serveur Express (écoute du port)
+│   ├── server.js                        # Démarrage du serveur Express (écoute du port)
+│   └── wsServer.js                      # WebSocket Server
 │
 ├── frontend/                           # Répertoire du frontend Angular
 │   ├── frontend_angular/               # Projet Angular
@@ -80,6 +86,7 @@ API-REST-SENSORS-WS/
 │
 │
 ├── README.md                            # Explication du projet
+├── .env                                 # Variables (URI MongoDB, port, token secret, etc.)
 ├── package.json                         # Dépendances Node.js
 ├── package-lock.json                    # Version des dépendances Node.js
 └── .gitignore                           # Ignorer node_modules, environnement virtuel, etc.
@@ -87,7 +94,7 @@ API-REST-SENSORS-WS/
 
 ## 📦 Dépendances
 
-Ce projet utilise Node.js pour exécuter un serveur Express (backend) et un serveur statique pour le frontend.
+Ce projet utilise Node.js pour exécuter un serveur Express (backend) et Angular CLI pour lancer le serveur de développement du frontend.
 
 ### Dépendances principales (`dependencies`)
 - **express** : Framework web pour créer l’API REST.
@@ -95,15 +102,24 @@ Ce projet utilise Node.js pour exécuter un serveur Express (backend) et un serv
 - **cors** : Middleware pour gérer les politiques CORS.
 - **dotenv** : Pour charger les variables d’environnement à partir d’un fichier `.env`.
 - **helmet** : Pour sécuriser les en-têtes HTTP.
-- **ejs** : Moteur de template (si utilisé).
+- **ejs** : Moteur de template.
+- **jsonwebtoken** : Pour la gestion des tokens JWT.
+- **bcrypt** : Pour le hachage des mots de passe.
+- **ws** : Pour la gestion des WebSockets.
+- **socket.io-client** : Pour la communication avec le serveur WebSocket depuis le frontend.
 
-### Dépendances de développement (`devDependencies`)
-- **http-server** : Pour servir le frontend statique dans `frontend_angular`.
+### Dépendances Python (`client_rpi`)
+- **adafruit-circuitpython-dht** : Pour la lecture des capteurs DHT11.
+- **pyyaml** : Pour la lecture du fichier de configuration `config.yaml`.
+- **websocket-client** : Pour la communication WebSocket avec le serveur.
+- **rpi-lgpio** : Pour la gestion des broches GPIO sur le Raspberry Pi.
 
 ## ⚙️ Installation et lancement
 
 1. Clonez le dépôt.
-2. Installez les dépendances avec `npm install`.
-4. Lancez le serveur backend avec `npm run start:backend`.
-5. Lancez le serveur frontend dans le fichier frontend/frontend_angular avec `npm start`.
-6. Lancer le fichier main.py dans le client_rpi
+2. Installez les dépendances depuis la racine du projet avec `npm install`.
+3. Lancez le serveur backend avec `npm run start:backend`.
+4. Installez les dépendances frontend avec `npm install` dans le répertoire `frontend/frontend_angular`.
+*S'assurer d'avoir installé Angular CLI globalement (`npm install -g @angular/cli`) si ce n'est pas déjà fait.*
+5. Lancez le serveur frontend dans le dossier `frontend/frontend_angular` avec `npm start`.
+6. Lancer le client Raspberry Pi avec `python main.py` dans le répertoire `client_rpi`.
